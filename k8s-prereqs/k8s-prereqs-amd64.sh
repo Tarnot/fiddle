@@ -54,7 +54,7 @@ cat <<- TOML | sudo tee /etc/containerd/config.toml
 version = 2
 [plugins]
   [plugins."io.containerd.grpc.v1.cri"]
-    sandbox_image = "registry.k8s.io/pause:3.2"
+    sandbox_image = "registry.k8s.io/pause:3.9"
     [plugins."io.containerd.grpc.v1.cri".containerd]
       discard_unpacked_layers = true
       [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
