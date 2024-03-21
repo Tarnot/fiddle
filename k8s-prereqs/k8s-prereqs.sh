@@ -39,9 +39,9 @@ sudo modprobe overlay
 sudo modprobe br_netfilter
 
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-iptables = 1
 net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward                 = 1
+net.ipv4.ip_forward = 1
 EOF
 
 sudo sysctl --system
@@ -68,6 +68,8 @@ sudo systemctl restart containerd
 
 # Kubetools Setup
 ####################
+sudo swapoff -a
+sudo sed -i 's/\/swap/#\/swap/' /etc/fstab
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
