@@ -4,7 +4,9 @@
 ##############################
 
 # Cleanup
-echo "-----Cleanup-----"
+echo "-----------------------------------------------------"
+echo "-----------------------Cleanup-----------------------"
+echo "-----------------------------------------------------"
 ####################
 sudo kubeadm reset -f; sudo apt-get -y purge --autoremove --allow-change-held-packages kubeadm kubectl kubelet kubernetes-cni containerd; sudo rm -rf ~/.kube /etc/cni /etc/kubernetes /etc/apparmor.d/docker /etc/systemd/system/etcd* /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/lib/etcd2/ /var/run/kubernetes /opt/cni /var/lib/calico /var/log/calico /var/lib/cni /var/log/containers/ /var/log/pods/ /etc/containerd/ /etc/apt/keyrings/kubernetes-apt-keyring.gpg /etc/modules-load.d/containerd.conf /etc/sysctl.d/99-kubernetes-cri.conf; sudo rm -rf /opt/containerd/
 
@@ -12,16 +14,25 @@ sudo kubeadm reset -f; sudo apt-get -y purge --autoremove --allow-change-held-pa
 ####################
 
 # Prep setup area
+echo "--------------------------------------------------------------"
+echo "-----------------------CPrep setup area-----------------------"
+echo "--------------------------------------------------------------"
 mkdir /home/fiddle/install-k8s/
 cd /home/fiddle/install-k8s/
 
 # Download container files
+echo "----------------------------------------------------------------------"
+echo "-----------------------Download container files-----------------------"
+echo "----------------------------------------------------------------------"
 wget https://github.com/containerd/containerd/releases/download/v1.7.14/containerd-1.7.14-linux-amd64.tar.gz
 wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
 wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.amd64
 wget https://github.com/containernetworking/plugins/releases/download/v1.4.1/cni-plugins-linux-amd64-v1.4.1.tgz
 
 # Install container files
+echo "---------------------------------------------------------------------"
+echo "-----------------------Install container files-----------------------"
+echo "---------------------------------------------------------------------"
 sudo tar Cxzvf /usr/local /home/fiddle/install-k8s/containerd-1.7.14-linux-amd64.tar.gz
 sudo cp /home/fiddle/install-k8s/containerd.service /etc/systemd/system/containerd.service
 sudo systemctl daemon-reload 
@@ -31,6 +42,9 @@ sudo mkdir -p /opt/cni/bin
 sudo tar Cxzvf /opt/cni/bin /home/fiddle/install-k8s/cni-plugins-linux-amd64-v1.4.1.tgz
 
 # Networking Setup
+echo "--------------------------------------------------------------"
+echo "-----------------------Networking Setup-----------------------"
+echo "--------------------------------------------------------------"
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -48,6 +62,9 @@ EOF
 sudo sysctl --system
 
 # CGroup Setup
+echo "----------------------------------------------------------"
+echo "-----------------------CGroup Setup-----------------------"
+echo "----------------------------------------------------------"
 sudo mkdir -p /etc/containerd/
 sudo touch /etc/containerd/config.toml
 
@@ -68,7 +85,9 @@ TOML
 sudo systemctl restart containerd
 
 # Kubetools Setup
-####################
+echo "-------------------------------------------------------------"
+echo "-----------------------Kubetools Setup-----------------------"
+echo "-------------------------------------------------------------"
 sudo swapoff -a
 sudo sed -i 's/\/swap/#\/swap/' /etc/fstab
 sudo apt-get update
