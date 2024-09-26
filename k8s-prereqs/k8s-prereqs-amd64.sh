@@ -45,22 +45,28 @@ cd /home/fiddle/install-k8s/
 echo "----------------------------------------------------------------------"
 echo "-----------------------Download container files-----------------------"
 echo "----------------------------------------------------------------------"
-wget https://github.com/containerd/containerd/releases/download/v1.7.14/containerd-1.7.14-linux-amd64.tar.gz
+#wget https://github.com/containerd/containerd/releases/download/v1.7.14/containerd-1.7.14-linux-amd64.tar.gz
+wget https://github.com/containerd/containerd/releases/download/v1.7.22/containerd-1.7.22-linux-arm64.tar.gz
 wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
-wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.amd64
-wget https://github.com/containernetworking/plugins/releases/download/v1.4.1/cni-plugins-linux-amd64-v1.4.1.tgz
+#wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.amd64
+wget https://github.com/opencontainers/runc/releases/download/v1.1.14/runc.arm64
+#wget https://github.com/containernetworking/plugins/releases/download/v1.4.1/cni-plugins-linux-amd64-v1.4.1.tgz
+wget https://github.com/containernetworking/plugins/releases/download/v1.5.1/cni-plugins-linux-arm64-v1.5.1.tgz
 
 # Install container files
 echo "---------------------------------------------------------------------"
 echo "-----------------------Install container files-----------------------"
 echo "---------------------------------------------------------------------"
-sudo tar Cxzvf /usr/local /home/fiddle/install-k8s/containerd-1.7.14-linux-amd64.tar.gz
+#sudo tar Cxzvf /usr/local /home/fiddle/install-k8s/containerd-1.7.14-linux-amd64.tar.gz
+sudo tar Cxzvf /usr/local /home/fiddle/install-k8s/containerd-1.7.22-linux-arm64.tar.gz
 sudo cp /home/fiddle/install-k8s/containerd.service /etc/systemd/system/containerd.service
 sudo systemctl daemon-reload 
 sudo systemctl enable --now containerd
-sudo install -m 755 /home/fiddle/install-k8s/runc.amd64 /usr/local/sbin/runc
+#sudo install -m 755 /home/fiddle/install-k8s/runc.amd64 /usr/local/sbin/runc
+sudo install -m 755 /home/fiddle/install-k8s/runc.arm64 /usr/local/sbin/runc
 sudo mkdir -p /opt/cni/bin
-sudo tar Cxzvf /opt/cni/bin /home/fiddle/install-k8s/cni-plugins-linux-amd64-v1.4.1.tgz
+#sudo tar Cxzvf /opt/cni/bin /home/fiddle/install-k8s/cni-plugins-linux-amd64-v1.4.1.tgz
+sudo tar Cxzvf /opt/cni/bin /home/fiddle/install-k8s/cni-plugins-linux-arm64-v1.5.1.tgz
 
 # Networking Setup
 echo "--------------------------------------------------------------"
