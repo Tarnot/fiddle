@@ -8,17 +8,26 @@ echo "-----------------------------------------------------"
 echo "-----------------------Cleanup-----------------------"
 echo "-----------------------------------------------------"
 ####################
-echo "          -----------------------------------------------------"
-echo "          -----------------------Cleanup-----------------------"
-echo "          -----------------------------------------------------"
+echo "          --------------------------------------------------------------------"
+echo "          -----------------------sudo kubeadm reset -f-----------------------"
+echo "          --------------------------------------------------------------------"
 sudo kubeadm reset -f
-echo "          -----------------------------------------------------"
-echo "          -----------------------Cleanup-----------------------"
-echo "          -----------------------------------------------------"
-sudo apt-get -y purge --autoremove --allow-change-held-packages kubeadm kubectl kubelet kubernetes-cni containerd;
-echo "          -----------------------------------------------------"
-echo "          -----------------------Cleanup-----------------------"
-echo "          -----------------------------------------------------"
+echo "          ------------------------------------------------------------------------------------------------------------------------"
+echo "          -----------------------sudo apt-get -y purge --autoremove --allow-change-held-packages kubeadm;-------------------------"
+echo "          ------------------------------------------------------------------------------------------------------------------------"
+sudo apt-get -y purge --autoremove --allow-change-held-packages kubeadm;
+echo "                    -----------------------kubectl-----------------------"
+sudo apt-get -y purge --autoremove --allow-change-held-packages kubectl;
+echo "                    -----------------------kubelet-----------------------"
+sudo apt-get -y purge --autoremove --allow-change-held-packages kubelet;
+echo "                    -----------------------kubernetes-cni-----------------------"
+sudo apt-get -y purge --autoremove --allow-change-held-packages kubernetes-cni;
+echo "                    -----------------------containerd-----------------------"
+sudo apt-get -y purge --autoremove --allow-change-held-packages containerd;
+echo "                    -----------------------done-----------------------"
+echo "          --------------------------------------------------------"
+echo "          ---------------------------rm etc-----------------------"
+echo "          --------------------------------------------------------"
 sudo rm -rf ~/.kube /etc/cni /etc/kubernetes /etc/apparmor.d/docker /etc/systemd/system/etcd* /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/lib/etcd2/ /var/run/kubernetes /opt/cni /var/lib/calico /var/log/calico /var/lib/cni /var/log/containers/ /var/log/pods/ /etc/containerd/ /etc/apt/keyrings/kubernetes-apt-keyring.gpg /etc/modules-load.d/containerd.conf /etc/sysctl.d/99-kubernetes-cri.conf; sudo rm -rf /opt/containerd/
 
 # Container Setup
