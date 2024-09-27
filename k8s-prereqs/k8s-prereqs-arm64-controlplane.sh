@@ -28,7 +28,7 @@ sudo kubeadm init --pod-network-cidr=192.168.0.0/23;
 # Setup User
 mkdir -p $MYHOME/.kube;
 sudo chown fiddle:fiddle $MYHOME/.kube;
-sudo cp -i /etc/kubernetes/admin.conf $MYHOME/.kube/config;
+sudo cp -irf /etc/kubernetes/admin.conf $MYHOME/.kube/config;
 sudo chown $(id -u):$(id -g) $MYHOME/.kube/config;
 sudo chown fiddle:fiddle $MYHOME/.kube/config;
 
@@ -42,6 +42,8 @@ sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifes
 sudo chown fiddle:fiddle $MYHOME/install-k8s/custom-resources.yaml;
 sudo find $MYHOME/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;
 sudo kubectl create -f custom-resources.yaml;
+
+echo "          ##################################################";
 
 # Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 sudo kubectl cluster-info;

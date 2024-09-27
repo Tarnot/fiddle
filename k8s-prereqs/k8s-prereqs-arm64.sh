@@ -6,9 +6,9 @@
 
 # Setup
 # TO PREP FOR FRESH DOWNLOAD OF THIS FILE:
-#  sudo rm -rf /home/fiddle/repo/fiddle/; cd /home/fiddle/repo/; git clone https://github.com/Tarnot/fiddle.git; cd /home/fiddle/repo/fiddle/k8s-prereqs/; chmod 755 *;
+#  sudo rm -rf /home/fiddle/repo/fiddle/; cd /home/fiddle/repo/; git clone https://github.com/Tarnot/fiddle.git; cd /home/fiddle/repo/fiddle/k8s-prereqs/; chmod 755 *;sudo chown fiddle:fiddle /home/fiddle/.kube/config;
 # OR
-#  cd /home/fiddle/repo/fiddle/k8s-prereqs/; git stash; git pull; chmod 755 *;
+#  cd /home/fiddle/repo/fiddle/k8s-prereqs/; git stash; git pull; chmod 755 *;sudo chown fiddle:fiddle /home/fiddle/.kube/config;
 # THEN
 #  sudo ./k8s-prereqs-arm64.sh
 # AND FOR CONTROLPLANE CONFIG:
