@@ -11,6 +11,8 @@
 #  cd ~/repo/fiddle/k8s-prereqs/; git stash; git pull; chmod 755 *;
 # THEN
 #  sudo ./k8s-prereqs-arm64.sh
+# AND FOR CONTROLPLANE CONFIG:
+#  sudo ./k8s-prereqs-arm64-controlplane.sh
 ##################################################
 
 # Begining of Script
@@ -37,29 +39,30 @@ sudo apt-get -y purge --autoremove --allow-change-held-packages kubernetes-cni;
 sudo apt-get -y purge --autoremove --allow-change-held-packages containerd;
 
 # Delete files and directories
-sudo rm -rf ~/.kube /etc/cni/;
-sudo rm -rf /etc/kubernetes/;
+
 sudo rm -rf /etc/apparmor.d/docker/;
-sudo rm -rf /etc/systemd/system/etcd*;
-sudo rm -rf /var/lib/dockershim/;
-sudo rm -rf /var/lib/etcd/;
-sudo rm -rf /var/lib/kubelet/;
-sudo rm -rf /var/lib/etcd2/;
-sudo rm -rf /var/run/kubernetes/;
-sudo rm -rf /opt/cni/;
-sudo rm -rf /var/lib/calico/;
-sudo rm -rf /var/log/calico/;
-sudo rm -rf /var/lib/cni/;
-sudo rm -rf /var/log/containers/;
-sudo rm -rf /var/log/pods/;
-sudo rm -rf /etc/containerd/;
 sudo rm -rf /etc/apt/keyrings/kubernetes-apt-keyring.gpg;
 sudo rm -rf /etc/apt/sources.list.d/kubernetes.list;
+sudo rm -rf /etc/cni/;
+sudo rm -rf /etc/containerd/;
+sudo rm -rf /etc/kubernetes/;
 sudo rm -rf /etc/modules-load.d/containerd.conf;
 sudo rm -rf /etc/sysctl.d/99-kubernetes-cri.conf;
+sudo rm -rf /etc/systemd/system/etcd*;
+sudo rm -rf /opt/cni/;
 sudo rm -rf /opt/containerd/;
-sudo rm -rf /home/fiddle/install-k8s/;
-sudo rm -rf $HOME/.kube/config
+sudo rm -rf /var/lib/calico/;
+sudo rm -rf /var/lib/cni/;
+sudo rm -rf /var/lib/dockershim/;
+sudo rm -rf /var/lib/etcd/;
+sudo rm -rf /var/lib/etcd2/;
+sudo rm -rf /var/lib/kubelet/;
+sudo rm -rf /var/log/calico/;
+sudo rm -rf /var/log/containers/;
+sudo rm -rf /var/log/pods/;
+sudo rm -rf /var/run/kubernetes/;
+sudo rm -rf ~/.kube;
+sudo rm -rf ~/install-k8s/;
 
 # Container Setup
 ##################################################
