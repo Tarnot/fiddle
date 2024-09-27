@@ -157,21 +157,15 @@ sudo systemctl enable --now kubelet;
 # Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 #sudo kubectl cluster-info;
 
-# Enable kubectl autocompletion
-sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc
-
-# Extend autocompletion to alias
-sudo echo 'alias k=kubectl' >> ~/.bashrc
-sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
-
-# Enable autocompletion in current shell
-source ~/.bashrc;
-
 # Manual setup steps
 ##################################################
 
 # echo instructions
 echo "ON CONTROL PLANE RUN:";
+echo "          sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc";
+echo "          sudo echo 'alias k=kubectl' >> ~/.bashrc";
+echo "          sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc";
+echo "          source ~/.bashrc";
 echo "          sudo kubeadm init;";
 echo "          ##################################################";
 echo "          sudo mkdir -p $HOME/.kube;";
