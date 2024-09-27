@@ -25,6 +25,8 @@ MYHOME="/home/fiddle"
 # Initialize cluster
 sudo kubeadm init --pod-network-cidr=192.168.0.0/23;
 
+echo "          ##################################################";
+
 # Setup User
 mkdir -p $MYHOME/.kube;
 sudo chown fiddle:fiddle $MYHOME/.kube;
@@ -32,8 +34,12 @@ sudo cp -irf /etc/kubernetes/admin.conf $MYHOME/.kube/config;
 sudo chown $(id -u):$(id -g) $MYHOME/.kube/config;
 sudo chown fiddle:fiddle $MYHOME/.kube/config;
 
+echo "          ##################################################";
+
 # Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 kubectl cluster-info;
+
+echo "          ##################################################";
 
 # Install Calico
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml --validate=false;
