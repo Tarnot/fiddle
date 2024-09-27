@@ -22,32 +22,40 @@ echo "##################################################";
 # Post Installation Configuration
 ##################################################
 
-# Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-#sudo kubectl cluster-info;
+# Initialize cluster
+sudo kubeadm init --pod-network-cidr=192.168.0.0/23;
 
+# Setup User
+mkdir -p $HOME/.kube;
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config;
+sudo chown $(id -u):$(id -g) $HOME/.kube/config;
+
+# Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+sudo kubectl cluster-info;
+
+# Install Calico
+sudo kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml --validate=false;
+cd ~/install-k8s/;
+sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml;
+sudo find ~/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;
+kubectl create -f custom-resources.yaml;
+
+echo "          watch kubectl get pods -n calico-system;";
+echo "          sudo kubectl get pods --all-namespaces;";
+
+echo "          ##################################################";
 # echo instructions
 echo "ON CONTROL PLANE RUN:";
 echo "          sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc";
 echo "          sudo echo 'alias k=kubectl' >> ~/.bashrc";
 echo "          sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc";
 echo "          source ~/.bashrc";
-sudo kubeadm init --pod-network-cidr=192.168.0.0/23;
-sudo kubectl cluster-info;
-echo "          ##################################################";
-mkdir -p $HOME/.kube;
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config;
-sudo chown $(id -u):$(id -g) $HOME/.kube/config;
-sudo kubectl cluster-info;
+
 echo "          ##################################################";
 #echo "          sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml;";
-echo "          sudo kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml --validate=false;";
-echo "          cd ~/install-k8s/;";
-echo "          sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml;";
-echo "          sudo find ~/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;";
-echo "          kubectl create -f custom-resources.yaml;";
+
 echo "          sudo kubectl taint nodes --all node-role.kubernetes.io/control-plane-;";
-echo "          watch kubectl get pods -n calico-system;";
-echo "          sudo kubectl get pods --all-namespaces;";
+
 
 echo "          sudo kubeadm token create --print-join-command;";
 echo "COPY RESULTING TEXT";
