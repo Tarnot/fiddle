@@ -29,7 +29,6 @@ sudo kubeadm reset -f;
 
 # Reset IP tables
 sudo iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
-sudo ipvsadm -C;
 
 # Uninstall kubernetes
 sudo apt-get -y purge --autoremove --allow-change-held-packages kubeadm;
