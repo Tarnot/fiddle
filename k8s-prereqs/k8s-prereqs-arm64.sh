@@ -59,6 +59,7 @@ sudo rm -rf /etc/modules-load.d/containerd.conf;
 sudo rm -rf /etc/sysctl.d/99-kubernetes-cri.conf;
 sudo rm -rf /opt/containerd/;
 sudo rm -rf /home/fiddle/install-k8s/;
+sudo rm -rf $HOME/.kube/config
 
 # Container Setup
 ##################################################
