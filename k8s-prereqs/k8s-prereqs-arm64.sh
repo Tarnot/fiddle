@@ -29,6 +29,10 @@ MYHOME="/home/fiddle"
 # Cleanup Old Installation
 ##################################################
 
+# Add socat
+sudo apt-get update;
+sudo apt-get install -y socat;
+
 # Return kubernetes to original state
 sudo kubeadm reset -f;
 

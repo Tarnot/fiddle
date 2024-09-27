@@ -26,7 +26,7 @@ MYHOME="/home/fiddle"
 sudo kubeadm init --pod-network-cidr=192.168.0.0/23;
 
 # Setup User
-mkdir -p $MYHOME/.kube;
+sudo mkdir -p $MYHOME/.kube;
 sudo cp -i /etc/kubernetes/admin.conf $MYHOME/.kube/config;
 sudo chown $(id -u):$(id -g) $MYHOME/.kube/config;
 
