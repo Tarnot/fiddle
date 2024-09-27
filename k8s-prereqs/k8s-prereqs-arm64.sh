@@ -158,14 +158,14 @@ sudo systemctl enable --now kubelet;
 sudo kubectl cluster-info;
 
 # Enable kubectl autocompletion
-echo 'source <(kubectl completion bash)' >> ~/.bashrc;
+sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc;
 
 # Extend autocompletion to alias
-echo 'alias k=kubectl' >> ~/.bashrc;
-echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc;
+sudo echo 'alias k=kubectl' >> ~/.bashrc;
+sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc;
 
 # Enable autocompletion in current shell
-source ~/.bashrc;
+sudo source ~/.bashrc;
 
 # Manual setup steps
 ##################################################
