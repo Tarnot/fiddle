@@ -155,7 +155,7 @@ sudo systemctl enable --now kubelet;
 ##################################################
 
 # Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-sudo kubectl cluster-info;
+#sudo kubectl cluster-info;
 
 # Enable kubectl autocompletion
 sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc;
