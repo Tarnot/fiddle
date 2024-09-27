@@ -89,7 +89,7 @@ sudo tar Cxzvf /opt/cni/bin /home/fiddle/install-k8s/cni-plugins-linux-arm64-v1.
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
-EOF;
+EOF
 
 # Apply modprobe
 sudo modprobe overlay;
@@ -100,7 +100,7 @@ cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward = 1
-EOF;
+EOF
 
 # Run sysctl
 sudo sysctl --system;
@@ -125,7 +125,7 @@ version = 2
           runtime_type = "io.containerd.runc.v2"
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
             SystemdCgroup = true
-TOML;
+TOML
 
 # Restart containerd
 sudo systemctl restart containerd;
