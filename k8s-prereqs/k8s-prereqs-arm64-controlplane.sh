@@ -33,20 +33,20 @@ sudo chown $(id -u):$(id -g) $MYHOME/.kube/config;
 sudo chown fiddle:fiddle $MYHOME/.kube/config;
 
 # Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-sudo kubectl cluster-info;
+kubectl cluster-info;
 
 # Install Calico
-sudo kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml --validate=false;
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml --validate=false;
 cd $MYHOME/install-k8s/;
 sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml;
 sudo chown fiddle:fiddle $MYHOME/install-k8s/custom-resources.yaml;
 sudo find $MYHOME/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;
-sudo kubectl create -f custom-resources.yaml;
+kubectl create -f custom-resources.yaml;
 
 echo "          ##################################################";
 
 # Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-sudo kubectl cluster-info;
+kubectl cluster-info;
 
 echo "          watch kubectl get pods -n calico-system;";
 echo "          sudo kubectl get pods --all-namespaces;";
