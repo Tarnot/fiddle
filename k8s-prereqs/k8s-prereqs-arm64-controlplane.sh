@@ -25,8 +25,6 @@ MYHOME="/home/fiddle"
 # Initialize cluster
 sudo kubeadm init --pod-network-cidr=192.168.0.0/23;
 
-echo "          ##################################################";
-
 # Setup User
 mkdir -p $MYHOME/.kube;
 sudo chown fiddle:fiddle $MYHOME/.kube;
@@ -34,19 +32,12 @@ sudo cp -irf /etc/kubernetes/admin.conf $MYHOME/.kube/config;
 sudo chown $(id -u):$(id -g) $MYHOME/.kube/config;
 sudo chown fiddle:fiddle $MYHOME/.kube/config;
 
-echo "          ##################################################";
-
-# Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-sudo -H -u fiddle bash -c 'kubectl cluster-info'
-
-echo "          ##################################################";
-
 # Install Calico
 sudo -H -u fiddle bash -c 'kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml --validate=false'
 cd $MYHOME/install-k8s/;
 sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml;
 sudo chown fiddle:fiddle $MYHOME/install-k8s/custom-resources.yaml;
-sudo find $MYHOME/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;
+sudo find $MYHOME/install-k8s/custom-resources.yaml -type f -exec sed -i 's/\/16/\/23/g' {} \;
 sudo -H -u fiddle bash -c 'kubectl create -f custom-resources.yaml'
 
 echo "          ##################################################";
