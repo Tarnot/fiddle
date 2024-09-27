@@ -8,7 +8,7 @@
 # TO PREP FOR FRESH DOWNLOAD OF THIS FILE:
 #  sudo rm -rf ~/repo/fiddle/; cd ~/repo/; git clone https://github.com/Tarnot/fiddle.git; cd ~/repo/fiddle/k8s-prereqs/; chmod 755 *;
 # OR
-#  cd ~/repo/k8s-prereqs/; git stash; git pull; chmod 755 *;
+#  cd ~/repo/fiddle/k8s-prereqs/; git stash; git pull; chmod 755 *;
 # THEN
 #  sudo ./k8s-prereqs-arm64.sh
 ##################################################
