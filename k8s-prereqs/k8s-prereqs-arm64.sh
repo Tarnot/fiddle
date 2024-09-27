@@ -165,7 +165,7 @@ sudo echo 'alias k=kubectl' >> ~/.bashrc;
 sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc;
 
 # Enable autocompletion in current shell
-sudo source ~/.bashrc;
+source ~/.bashrc;
 
 # Manual setup steps
 ##################################################
