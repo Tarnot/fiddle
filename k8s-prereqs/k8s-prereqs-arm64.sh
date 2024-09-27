@@ -174,22 +174,22 @@ echo "          sudo mkdir -p $HOME/.kube;";
 echo "          sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config;";
 echo "          sudo chown $(id -u):$(id -g) $HOME/.kube/config;";
 echo "          ##################################################";
-echo "          sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml";
-echo "          sudo kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml";
+echo "          sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml;";
+echo "          sudo kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml;";
 echo "          cd ~/install-k8s/;";
-echo "          sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml";
+echo "          sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml;";
 echo "          sudo find ~/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;";
 echo "          kubectl create -f custom-resources.yaml;";
 echo "          sudo kubectl taint nodes --all node-role.kubernetes.io/control-plane-;";
 echo "          watch kubectl get pods -n calico-system;";
-echo "          sudo kubectl get pods --all-namespaces";
+echo "          sudo kubectl get pods --all-namespaces;";
 echo "          sudo kubeadm token create --print-join-command;";
 echo "COPY RESULTING TEXT";
 echo "RUN ON EACH NODE (SOMETHING LIKE):";
 echo "          kubeadm join 192.168.254.210:6443 --token 6yglpi.f3tcar2s4qybckr7 --discovery-token-ca-cert-hash sha256:ad71aac8aff7ee25cf0eb5725a54c4990d0016849ace302d9235b3adcab57374";
 echo "TO ACCESS kubectl FROM ANOTHER COMPUTER:";
 echo "          scp root@<control-plane-host>:/etc/kubernetes/admin.conf .;";
-echo "          kubectl --kubeconfig ./admin.conf get nodes";
+echo "          kubectl --kubeconfig ./admin.conf get nodes;";
 
 # End of Script
 ##################################################
