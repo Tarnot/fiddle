@@ -26,7 +26,7 @@ echo "##################################################";
 sudo kubeadm reset -f;
 
 # Reset IP tables
-sudo iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X;
+sudo iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 sudo ipvsadm -C;
 
 # Uninstall kubernetes
@@ -134,9 +134,9 @@ sudo systemctl restart containerd;
 ##################################################
 
 # Setup k8s access for apt
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg;
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg;
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list;
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list;
 
 # Setup environment for k8s
@@ -158,11 +158,11 @@ sudo systemctl enable --now kubelet;
 #sudo kubectl cluster-info;
 
 # Enable kubectl autocompletion
-sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc;
+sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc
 
 # Extend autocompletion to alias
-sudo echo 'alias k=kubectl' >> ~/.bashrc;
-sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc;
+sudo echo 'alias k=kubectl' >> ~/.bashrc
+sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 
 # Enable autocompletion in current shell
 source ~/.bashrc;
