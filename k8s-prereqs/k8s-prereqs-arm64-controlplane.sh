@@ -5,12 +5,7 @@
 ##################################################
 
 # Setup
-# TO PREP FOR FRESH DOWNLOAD OF THIS FILE:
-#  sudo rm -rf ~/repo/fiddle/; cd ~/repo/; git clone https://github.com/Tarnot/fiddle.git; cd ~/repo/fiddle/k8s-prereqs/; chmod 755 *;
-# OR
-#  cd ~/repo/fiddle/k8s-prereqs/; git stash; git pull; chmod 755 *;
-# THEN
-#  sudo ./k8s-prereqs-arm64.sh
+# See k8s-prereqs-arm64.sh
 ##################################################
 
 # Begining of Script
@@ -19,6 +14,11 @@
 echo "Begining of Script";
 echo "##################################################";
 
+# Variables
+##################################################
+
+MYHOME = "/home/fiddle"
+
 # Post Installation Configuration
 ##################################################
 
@@ -26,18 +26,18 @@ echo "##################################################";
 sudo kubeadm init --pod-network-cidr=192.168.0.0/23;
 
 # Setup User
-mkdir -p $HOME/.kube;
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config;
-sudo chown $(id -u):$(id -g) $HOME/.kube/config;
+mkdir -p $MYHOME/.kube;
+sudo cp -i /etc/kubernetes/admin.conf $MYHOME/.kube/config;
+sudo chown $(id -u):$(id -g) $MYHOME/.kube/config;
 
 # Check Installation - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 sudo kubectl cluster-info;
 
 # Install Calico
 sudo kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml --validate=false;
-cd ~/install-k8s/;
+cd $MYHOME/install-k8s/;
 sudo wget https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml;
-sudo find ~/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;
+sudo find $MYHOME/install-k8s/custom-resources.yaml -type f -exec sed -i 's/16/23/g' {} \;
 kubectl create -f custom-resources.yaml;
 
 echo "          watch kubectl get pods -n calico-system;";
@@ -46,10 +46,10 @@ echo "          sudo kubectl get pods --all-namespaces;";
 echo "          ##################################################";
 # echo instructions
 echo "ON CONTROL PLANE RUN:";
-echo "          sudo echo 'source <(kubectl completion bash)' >> ~/.bashrc";
-echo "          sudo echo 'alias k=kubectl' >> ~/.bashrc";
-echo "          sudo echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc";
-echo "          source ~/.bashrc";
+echo "          sudo echo 'source <(kubectl completion bash)' >> $MYHOME/.bashrc";
+echo "          sudo echo 'alias k=kubectl' >> $MYHOME/.bashrc";
+echo "          sudo echo 'complete -o default -F __start_kubectl k' >> $MYHOME/.bashrc";
+echo "          source $MYHOME/.bashrc";
 
 echo "          ##################################################";
 #echo "          sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml;";

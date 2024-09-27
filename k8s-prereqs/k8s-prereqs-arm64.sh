@@ -6,9 +6,9 @@
 
 # Setup
 # TO PREP FOR FRESH DOWNLOAD OF THIS FILE:
-#  sudo rm -rf ~/repo/fiddle/; cd ~/repo/; git clone https://github.com/Tarnot/fiddle.git; cd ~/repo/fiddle/k8s-prereqs/; chmod 755 *;
+#  sudo rm -rf /home/fiddle/repo/fiddle/; cd /home/fiddle/repo/; git clone https://github.com/Tarnot/fiddle.git; cd /home/fiddle/repo/fiddle/k8s-prereqs/; chmod 755 *;
 # OR
-#  cd ~/repo/fiddle/k8s-prereqs/; git stash; git pull; chmod 755 *;
+#  cd /home/fiddle/repo/fiddle/k8s-prereqs/; git stash; git pull; chmod 755 *;
 # THEN
 #  sudo ./k8s-prereqs-arm64.sh
 # AND FOR CONTROLPLANE CONFIG:
@@ -20,6 +20,11 @@
 
 echo "Begining of Script";
 echo "##################################################";
+
+# Variables
+##################################################
+
+MYHOME = "/home/fiddle"
 
 # Cleanup Old Installation
 ##################################################
@@ -60,15 +65,15 @@ sudo rm -rf /var/log/calico/;
 sudo rm -rf /var/log/containers/;
 sudo rm -rf /var/log/pods/;
 sudo rm -rf /var/run/kubernetes/;
-sudo rm -rf ~/.kube;
-sudo rm -rf ~/install-k8s/;
+sudo rm -rf $MYHOME/.kube;
+sudo rm -rf $MYHOME/install-k8s/;
 
 # Container Setup
 ##################################################
 
 # Prep file setup area
-mkdir /home/fiddle/install-k8s/;
-cd /home/fiddle/install-k8s/;
+mkdir $MYHOME/install-k8s/;
+cd $MYHOME/install-k8s/;
 
 # Download container files
 wget https://github.com/containerd/containerd/releases/download/v1.7.22/containerd-1.7.22-linux-arm64.tar.gz;
@@ -77,13 +82,13 @@ wget https://github.com/opencontainers/runc/releases/download/v1.1.14/runc.arm64
 wget https://github.com/containernetworking/plugins/releases/download/v1.5.1/cni-plugins-linux-arm64-v1.5.1.tgz;
 
 # Install container files
-sudo tar Cxzvf /usr/local /home/fiddle/install-k8s/containerd-1.7.22-linux-arm64.tar.gz;
-sudo cp /home/fiddle/install-k8s/containerd.service /etc/systemd/system/containerd.service;
+sudo tar Cxzvf /usr/local $MYHOME/install-k8s/containerd-1.7.22-linux-arm64.tar.gz;
+sudo cp $MYHOME/install-k8s/containerd.service /etc/systemd/system/containerd.service;
 sudo systemctl daemon-reload;
 sudo systemctl enable --now containerd;
-sudo install -m 755 /home/fiddle/install-k8s/runc.arm64 /usr/local/sbin/runc;
+sudo install -m 755 $MYHOME/install-k8s/runc.arm64 /usr/local/sbin/runc;
 sudo mkdir -p /opt/cni/bin;
-sudo tar Cxzvf /opt/cni/bin /home/fiddle/install-k8s/cni-plugins-linux-arm64-v1.5.1.tgz;
+sudo tar Cxzvf /opt/cni/bin $MYHOME/install-k8s/cni-plugins-linux-arm64-v1.5.1.tgz;
 
 # Networking Setup
 ##################################################
