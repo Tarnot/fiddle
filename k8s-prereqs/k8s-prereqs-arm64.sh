@@ -77,6 +77,7 @@ sudo rm -rf $MYHOME/install-k8s/;
 
 # Prep file setup area
 mkdir $MYHOME/install-k8s/;
+sudo chown fiddle:fiddle $MYHOME/install-k8s/
 cd $MYHOME/install-k8s/;
 
 # Download container files
@@ -84,6 +85,13 @@ wget https://github.com/containerd/containerd/releases/download/v1.7.22/containe
 wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service;
 wget https://github.com/opencontainers/runc/releases/download/v1.1.14/runc.arm64;
 wget https://github.com/containernetworking/plugins/releases/download/v1.5.1/cni-plugins-linux-arm64-v1.5.1.tgz;
+
+# Change ownership
+
+sudo chown fiddle:fiddle $MYHOME/install-k8s/containerd-1.7.22-linux-arm64.tar.gz;
+sudo chown fiddle:fiddle $MYHOME/install-k8s/containerd.service;
+sudo chown fiddle:fiddle $MYHOME/install-k8s/runc.arm64;
+sudo chown fiddle:fiddle $MYHOME/install-k8s/cni-plugins-linux-arm64-v1.5.1.tgz;
 
 # Install container files
 sudo tar Cxzvf /usr/local $MYHOME/install-k8s/containerd-1.7.22-linux-arm64.tar.gz;
